@@ -1,5 +1,6 @@
 package com.zp.server.impl;
 
+import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.InputStream;
@@ -12,6 +13,25 @@ public class SocketSessionClient extends SessionClient<Socket> {
 
     SocketSessionClient(Socket socket){
         super(socket);
+        setSessionId();
+    }
+
+    @Override
+    protected String getSessionId() {
+        InputStream in = getInputStream();
+        byte[] b = new byte[1024];
+        String rmsg = null;
+        int len =0;
+        try {
+            ByteOutputStream bos = new ByteOutputStream();
+            while ((len = in.read(b)) > 0) {
+                bos.write(b,0,len);
+            }
+            rmsg = new String(bos.getBytes());
+        }catch (Exception e){
+            log.error(e.getMessage(),e);
+        }
+        return rmsg;
     }
 
 

@@ -1,6 +1,7 @@
 package com.zp.server.inter;
 
-import java.util.concurrent.ThreadPoolExecutor;
+
+import com.zp.server.impl.SessionClient;
 
 public interface ServerProtcolPub {
 
@@ -16,9 +17,10 @@ public interface ServerProtcolPub {
 
     /**
      * 连接管理池
-     * @param pools
+     * @param sessionId
+     * @param handler
      */
-    void setPools(ThreadPoolExecutor pools);
+    void setClientToPool(String sessionId, RequestHandler handler);
 
 
 

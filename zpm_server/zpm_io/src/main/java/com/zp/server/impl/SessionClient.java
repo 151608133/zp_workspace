@@ -11,6 +11,8 @@ public abstract  class SessionClient<T> implements Channel {
 
     private T t;
 
+    private String sessionId;
+
     public T getT(){
         return t;
     }
@@ -19,8 +21,15 @@ public abstract  class SessionClient<T> implements Channel {
         this.t=t;
     }
 
+    public void setSessionId(){
+        this.sessionId = getSessionId();
+    }
+
     SessionClient(T t){
         this.t = t;
     }
+
+
+    protected abstract String getSessionId();
 
 }

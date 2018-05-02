@@ -13,7 +13,7 @@ public class SocketHandler implements RequestHandler{
     private SessionClient client;
 
     @Override
-    public ProctolResponse handleRequest(ProctolRequest request) {
+    public synchronized ProctolResponse handleRequest(ProctolRequest request) {
         return null;
     }
 
