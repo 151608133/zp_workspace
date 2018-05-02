@@ -32,6 +32,11 @@
     <name>zpm-webapp</name>
     <artifactId>zpm-webapp</artifactId>
 
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
     <build>
         <plugins>
             <plugin>

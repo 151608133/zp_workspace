@@ -12,7 +12,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="zpm-webapp" target="1.5" />
+      <module name="zpm-webapp" target="1.8" />
       <module name="zpm_io" target="1.8" />
       <module name="zpm_server" target="1.5" />
     </bytecodeTargetLevel>

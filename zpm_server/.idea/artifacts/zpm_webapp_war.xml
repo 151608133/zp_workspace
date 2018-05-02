@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="zpm-webapp:war">
+    <output-path>$PROJECT_DIR$/zpm-webapp/target</output-path>
+    <root id="archive" name="zpm-webapp-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="zpm-webapp:war exploded" />
+    </root>
+  </artifact>
+</component>
