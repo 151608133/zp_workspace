@@ -8,4 +8,7 @@ public interface RequestHandler {
 
     ProctolResponse handleRequest(ProctolRequest request);
 
+
+
+
 }

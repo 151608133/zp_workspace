@@ -9,4 +9,6 @@ public interface ProctolRequest {
 
     public String getRequest();
 
+    public byte[] getRequestByte();
+
 }
