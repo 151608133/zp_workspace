@@ -7,8 +7,6 @@ package com.zp.server.inter;
 public interface ProctolRequest {
 
 
-    public String getRequest();
-
     public byte[] getRequestByte();
 
 }

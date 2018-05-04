@@ -95,4 +95,14 @@ public class SocketSessionClient extends SessionClient<Socket> {
         return null;
     }
 
+    @Override
+    public void close() {
+        try {
+            getInputStream().close();
+            getOutputStream().close();
+        }catch (Exception e){
+            log.error(e.getMessage(),e);
+        }
+    }
+
 }

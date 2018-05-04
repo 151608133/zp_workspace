@@ -1,6 +1,5 @@
 package com.zp.server.impl;
 
-import com.zp.server.ByteUtils;
 import com.zp.server.inter.ClientManager;
 import com.zp.server.inter.RequestHandler;
 import com.zp.server.inter.ServerProtcolPub;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Component;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.ThreadPoolExecutor;
 
 @Component
 @Slf4j
@@ -29,6 +27,9 @@ public class SocketServerPub implements ServerProtcolPub {
 
     @Override
     public void start() {
+        if(server!=null){
+            return;
+        }
         synchronized (this){
             try {
                 server = new ServerSocket(Integer.parseInt(params.getPort()));

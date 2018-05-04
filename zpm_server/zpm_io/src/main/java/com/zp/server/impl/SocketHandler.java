@@ -9,9 +9,11 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.OutputStream;
 
 @Slf4j
-@AllArgsConstructor
 public class SocketHandler extends RequestAbstractHandler{
 
+    SocketHandler(SessionClient client){
+        super(client);
+    }
 
     @Override
     public synchronized ProctolResponse handleRequest(ProctolRequest request) {

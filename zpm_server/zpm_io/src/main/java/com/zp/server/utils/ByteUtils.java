@@ -1,4 +1,4 @@
-package com.zp.server;
+package com.zp.server.utils;
 
 public class ByteUtils {
 

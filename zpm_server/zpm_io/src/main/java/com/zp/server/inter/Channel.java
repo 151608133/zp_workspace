@@ -17,4 +17,6 @@ public interface Channel {
 
     String getRemoteIpAddress();
 
+    void close();
+
 }

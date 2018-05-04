@@ -2,12 +2,14 @@ package com.zp.server.impl;
 
 import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import com.zp.server.inter.RequestHandler;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.InputStream;
 import java.io.OutputStream;
 
 @Slf4j
+@AllArgsConstructor
 public abstract class RequestAbstractHandler implements RequestHandler {
 
     private SessionClient client;
