@@ -19,19 +19,30 @@ public class SocketSessionClient extends SessionClient<Socket> {
     @Override
     protected String getSessionId() {
         InputStream in = getInputStream();
-        byte[] b = new byte[1024];
-        String rmsg = null;
         int len =0;
+        String phoneNum = null;
+
         try {
             ByteOutputStream bos = new ByteOutputStream();
-            while ((len = in.read(b)) > 0) {
-                bos.write(b,0,len);
+            byte[] b = new byte[10];
+            in.read(b,0,10);
+
+            b=new byte[2];
+            in.read(b,0,2);
+            int length = Integer.parseInt(new String(b));
+
+            b=new byte[length];
+            in.read(b,0,len);
+
+            for (int i=2;i<(2+11);i++){
+                Integer index = new Integer(b[i]);
+                phoneNum+=index;
             }
-            rmsg = new String(bos.getBytes());
+            log.info("sim number:"+phoneNum);
         }catch (Exception e){
             log.error(e.getMessage(),e);
         }
-        return rmsg;
+        return phoneNum;
     }
 
 
