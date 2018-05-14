@@ -9,4 +9,14 @@
     <context:property-placeholder location="classpath:param.properties"/><!-- 加载配置文件 -->
     <context:component-scan base-package="com.zp.*" />
     <context:annotation-config/>
+
+    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <!-- <ref bean="simpleTrigger"/> -->
+                <ref bean="cronTrigger"/>
+            </list>
+        </property>
+        <!-- <property name="autoStartup" value="true" /> -->
+    </bean>
 </beans>
