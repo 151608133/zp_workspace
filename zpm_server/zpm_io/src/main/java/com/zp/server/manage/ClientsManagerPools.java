@@ -14,13 +14,19 @@ public class ClientsManagerPools implements ClientManager {
     private ConcurrentHashMap<String,RequestHandler> clientMap = new ConcurrentHashMap<>();
 
 
+    /**
+     * 提交链接
+     * @param key
+     * @return
+     */
     @Override
     public void submit(String key, RequestHandler client) {
         clientMap.put(key,client);
     }
 
+
     /**
-     * 提交链接
+     * 获取连接
      * @param key
      * @return
      */
