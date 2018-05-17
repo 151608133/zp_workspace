@@ -3,12 +3,14 @@ package com.zp.server.factory;
 import com.zp.server.inter.ProctolRequest;
 import com.zp.server.inter.RequestActionInter;
 import com.zp.server.utils.ByteUtils;
+import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
 
 /**
  * 协议报文
  */
+@Component
 public class ProctolRequestFactory implements RequestActionInter {
 
 
@@ -56,8 +58,11 @@ public class ProctolRequestFactory implements RequestActionInter {
             }
             String body = start+address+"0103901F01";
             byte[] bs = ByteUtils.hexStringToByte(body);
-            String offIn = new BigInteger(1, bs).toString(10);
-            int out =  Integer.parseInt(offIn)-256*(Integer.parseInt(offIn)/256);
+            int out = 0;
+            for (int i = 0;i<bs.length;i++){
+                out +=new BigInteger(1,new byte[]{bs[i]}).intValue();
+            }
+            out =  out-256*(out/256);
             String hex = Integer.toHexString(out);
             String req = header+body+hex+"16";
             return ByteUtils.hexStringToByte(req);

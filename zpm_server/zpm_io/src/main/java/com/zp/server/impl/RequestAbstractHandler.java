@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.math.BigInteger;
 
 @Slf4j
 @AllArgsConstructor
@@ -24,13 +25,26 @@ public abstract class RequestAbstractHandler implements RequestHandler {
             OutputStream out = client.getOutputStream();
             out.write(b, 0, b.length);
             out.flush();
-            byte[] rb = new byte[1024];
             InputStream in = client.getInputStream();
-            int len = 0;
+            byte[] rb = new byte[13];//先读前13个字节  包含  FEFEFE 68 为帧起始符 68H 20 为仪表类型 T 地址码  控制位
             ByteOutputStream bos = new ByteOutputStream();
-            while((len = in.read(rb))>0){
-                bos.write(rb,0,len);
-            }
+            in.read(rb,0,rb.length);
+            bos.write(rb,0,rb.length);
+            // 读取报文体长度
+            rb = new byte[1];
+            in.read(rb,0,1);//读取 一个字节
+            bos.write(rb,0,1);
+            int bodyLength = new BigInteger(1,rb).intValue();
+            // 读取报文体
+            rb = new byte[bodyLength];
+            in.read(rb,0,bodyLength);
+            bos.write(rb,0,bodyLength);
+
+            // 读取校验码 和  结束符
+            rb = new byte[2];
+            in.read(rb,0,2);
+            bos.write(rb,0,2);
+
             return bos.getBytes();
         }catch (Exception e){
             log.error(e.getMessage(),e);
