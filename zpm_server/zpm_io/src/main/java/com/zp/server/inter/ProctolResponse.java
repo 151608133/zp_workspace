@@ -7,4 +7,6 @@ package com.zp.server.inter;
 public interface ProctolResponse {
 
     public String getResponse();
+
+
 }

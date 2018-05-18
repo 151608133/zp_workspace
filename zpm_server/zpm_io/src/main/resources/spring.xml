@@ -2,21 +2,22 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/tool"
+       xmlns:task="http://www.springframework.org/schema/task"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/tool
+        http://www.springframework.org/schema/tool/spring-tool.xsd
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task.xsd">
     <context:property-placeholder location="classpath:param.properties"/><!-- 加载配置文件 -->
     <context:component-scan base-package="com.zp.*" />
     <context:annotation-config/>
 
-    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-        <property name="triggers">
-            <list>
-                <!-- <ref bean="simpleTrigger"/> -->
-                <ref bean="cronTrigger"/>
-            </list>
-        </property>
-        <!-- <property name="autoStartup" value="true" /> -->
-    </bean>
+    <task:annotation-driven></task:annotation-driven>
+    <task:scheduled-tasks>
+        <task:scheduled ref="" method=""/>
+    </task:scheduled-tasks>
 </beans>

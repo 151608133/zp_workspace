@@ -26,7 +26,7 @@ public abstract class RequestAbstractHandler implements RequestHandler {
             out.write(b, 0, b.length);
             out.flush();
             InputStream in = client.getInputStream();
-            byte[] rb = new byte[13];//先读前13个字节  包含  FEFEFE 68 为帧起始符 68H 20 为仪表类型 T 地址码  控制位
+            byte[] rb = new byte[14];//先读前14个字节  包含  FEFEFE 68 为帧起始符 68H 20 为仪表类型 T 地址码  控制位
             ByteOutputStream bos = new ByteOutputStream();
             in.read(rb,0,rb.length);
             bos.write(rb,0,rb.length);
