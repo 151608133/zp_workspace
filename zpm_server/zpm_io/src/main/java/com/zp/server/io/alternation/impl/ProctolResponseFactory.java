@@ -1,7 +1,7 @@
-package com.zp.server.factory;
+package com.zp.server.io.alternation.impl;
 
-import com.zp.server.inter.ProctolResponse;
-import com.zp.server.inter.ResponseActionInter;
+import com.zp.server.io.alternation.inter.ProctolResponse;
+import com.zp.server.io.alternation.inter.ResponseActionInter;
 
 public class ProctolResponseFactory implements ResponseActionInter {
 

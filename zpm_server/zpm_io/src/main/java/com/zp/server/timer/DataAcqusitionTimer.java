@@ -1,10 +1,10 @@
 package com.zp.server.timer;
 
 import com.zp.server.common.Customer;
-import com.zp.server.inter.ClientManager;
-import com.zp.server.inter.ProctolResponse;
-import com.zp.server.inter.RequestActionInter;
-import com.zp.server.inter.RequestHandler;
+import com.zp.server.io.connmanage.inter.ClientManager;
+import com.zp.server.io.alternation.inter.ProctolResponse;
+import com.zp.server.io.alternation.inter.RequestActionInter;
+import com.zp.server.io.create.inter.RequestHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

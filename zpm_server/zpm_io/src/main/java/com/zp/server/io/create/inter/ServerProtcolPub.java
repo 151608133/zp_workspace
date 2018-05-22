@@ -1,7 +1,5 @@
-package com.zp.server.inter;
+package com.zp.server.io.create.inter;
 
-
-import com.zp.server.impl.SessionClient;
 
 public interface ServerProtcolPub {
 

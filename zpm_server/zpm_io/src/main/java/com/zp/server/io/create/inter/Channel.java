@@ -1,4 +1,4 @@
-package com.zp.server.inter;
+package com.zp.server.io.create.inter;
 
 import java.io.InputStream;
 import java.io.OutputStream;

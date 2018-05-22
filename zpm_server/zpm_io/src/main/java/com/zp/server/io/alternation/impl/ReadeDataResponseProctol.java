@@ -1,5 +1,7 @@
-package com.zp.server.model;
+package com.zp.server.io.alternation.impl;
 
+import com.zp.server.common.TabEnum;
+import com.zp.server.io.alternation.absClazz.AbstractProctolResponse;
 import com.zp.server.utils.ByteUtils;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -87,5 +89,10 @@ public class ReadeDataResponseProctol extends AbstractProctolResponse {
         sysStatus =ByteUtils.bytesToHexString(Arrays.copyOfRange(bodyBytes,41,43));// 系统状态
 
 
+    }
+
+    @Override
+    public TabEnum getTabEnum() {
+        return null;
     }
 }

@@ -1,6 +1,6 @@
-package com.zp.server.model;
+package com.zp.server.io.alternation.absClazz;
 
-import com.zp.server.inter.ProctolResponse;
+import com.zp.server.io.alternation.inter.ProctolResponse;
 import com.zp.server.utils.ByteUtils;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +43,7 @@ public abstract class AbstractProctolResponse implements ProctolResponse {
         this.b = b;
     }
 
-    AbstractProctolResponse(byte[] b){
+    public AbstractProctolResponse(byte[] b){
         this.b = b;
         initData();
     }

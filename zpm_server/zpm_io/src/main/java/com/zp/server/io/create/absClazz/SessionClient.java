@@ -1,6 +1,6 @@
-package com.zp.server.impl;
+package com.zp.server.io.create.absClazz;
 
-import com.zp.server.inter.Channel;
+import com.zp.server.io.create.inter.Channel;
 
 
 /**
@@ -25,7 +25,7 @@ public abstract  class SessionClient<T> implements Channel {
         this.sessionId = getSessionId();
     }
 
-    SessionClient(T t){
+    public SessionClient(T t){
         this.t = t;
     }
 

@@ -1,7 +1,7 @@
-package com.zp.server.manage;
+package com.zp.server.io.connmanage.impl;
 
-import com.zp.server.inter.ClientManager;
-import com.zp.server.inter.RequestHandler;
+import com.zp.server.io.connmanage.inter.ClientManager;
+import com.zp.server.io.create.inter.RequestHandler;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ConcurrentHashMap;
