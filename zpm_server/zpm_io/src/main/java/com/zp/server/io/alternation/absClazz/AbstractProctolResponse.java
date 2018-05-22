@@ -43,6 +43,7 @@ public abstract class AbstractProctolResponse implements ProctolResponse {
         this.b = b;
     }
 
+
     public AbstractProctolResponse(byte[] b){
         this.b = b;
         initData();

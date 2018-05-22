@@ -50,7 +50,7 @@ public class ReadeDataResponseProctol extends AbstractProctolResponse {
     private String sysStatus;//系统状态字
 
 
-    ReadeDataResponseProctol(byte[] b) {
+    public ReadeDataResponseProctol(byte[] b) {
         super(b);
     }
 
@@ -84,15 +84,21 @@ public class ReadeDataResponseProctol extends AbstractProctolResponse {
 
         outTemp = ByteUtils.bytesToHexString(Arrays.copyOfRange(bodyBytes,31,34));//出口温度 //TODO 需要逆序
 
-        workTime =ByteUtils.bytesToHexString(Arrays.copyOfRange(bodyBytes,34,41));//工作时间 //TODO 需要逆序
+        workTime = ByteUtils.bytesToHexString(Arrays.copyOfRange(bodyBytes,34,37));//系统日期时间 //TODO 需要逆序
 
-        sysStatus =ByteUtils.bytesToHexString(Arrays.copyOfRange(bodyBytes,41,43));// 系统状态
+        sysTime = ByteUtils.bytesToHexString(Arrays.copyOfRange(bodyBytes,37,44));//系统日期时间 //TODO 需要逆序
 
+        sysStatus = ByteUtils.bytesToHexString(Arrays.copyOfRange(bodyBytes,44,46));// 系统状态
 
     }
 
     @Override
     public TabEnum getTabEnum() {
         return null;
+    }
+
+    @Override
+    public String toString(){
+        return ByteUtils.bytesToHexString(getB());
     }
 }

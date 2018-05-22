@@ -18,6 +18,9 @@
 
     <task:annotation-driven></task:annotation-driven>
     <task:scheduled-tasks>
-        <task:scheduled ref="" method=""/>
+        <task:scheduled ref="dataAcqTimer" method="execute" cron="0 0 0/3 * * ? *"/>
     </task:scheduled-tasks>
+    <task:scheduler id="myScheduler" pool-size="10"/>
+
+
 </beans>

@@ -1,5 +1,6 @@
 package com.zp.server.io.create.impl;
 
+import com.zp.server.io.alternation.impl.ReadeDataResponseProctol;
 import com.zp.server.io.create.absClazz.RequestAbstractHandler;
 import com.zp.server.io.alternation.inter.ProctolRequest;
 import com.zp.server.io.alternation.inter.ProctolResponse;
@@ -14,11 +15,11 @@ public class SocketHandler extends RequestAbstractHandler {
     }
 
     @Override
-    public synchronized ProctolResponse handleRequest(ProctolRequest request) {
+    public ProctolResponse handleRequest(ProctolRequest request) {
         byte[]  b = sendOutMsg(request.getRequestByte());
         request.getTabEnum();
-
-        return null;
+        ReadeDataResponseProctol responseProctol = new ReadeDataResponseProctol(b);
+        return responseProctol;
     }
 
 
