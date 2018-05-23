@@ -32,9 +32,11 @@ public class SocketServerPub implements ServerProtcolPub {
         }
         synchronized (this){
             try {
+                log.info("socket server start port{}",params.getPort());
                 server = new ServerSocket(Integer.parseInt(params.getPort()));
                 while(true){
                     Socket socket = server.accept();
+                    log.info("receive socket client connections !");
                     SocketSessionClient sessionClient = new SocketSessionClient(socket);
                     RequestHandler handler = new SocketHandler(sessionClient);
                     setClientToPool(sessionClient.getSessionId(), handler);
