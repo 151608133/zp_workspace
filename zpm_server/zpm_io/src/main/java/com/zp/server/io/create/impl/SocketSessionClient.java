@@ -21,7 +21,7 @@ public class SocketSessionClient extends SessionClient<Socket> {
     protected String getSessionId() {
         InputStream in = getInputStream();
         int len =0;
-        String phoneNum = null;
+        String phoneNum = "";
 
         try {
             ByteOutputStream bos = new ByteOutputStream();
@@ -30,7 +30,7 @@ public class SocketSessionClient extends SessionClient<Socket> {
 
             b=new byte[2];
             in.read(b,0,2);
-            int length = Integer.parseInt(new String(b));
+            int length = b[1];
 
             b=new byte[length];
             in.read(b,0,len);
