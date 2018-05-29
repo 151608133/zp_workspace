@@ -94,7 +94,7 @@ public class ReadeDataResponseProctol extends AbstractProctolResponse {
 
     @Override
     public TabEnum getTabEnum() {
-        return null;
+        return TabEnum.getTabNumByValue(getTableType());
     }
 
     @Override

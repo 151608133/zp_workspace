@@ -20,4 +20,18 @@ public enum TabEnum {
         this.content = content;
     }
 
+
+    public static TabEnum getTabNumByValue(String content){
+        if(content==null||"".equals(content.trim())){
+            return null;
+        }
+        TabEnum[] values = TabEnum.values();
+        for (int i = 0; i < values.length; i++) {
+            if(values[i].content.equals(content)){
+                return values[i];
+            }
+        }
+        return null;
+    }
+
 }
