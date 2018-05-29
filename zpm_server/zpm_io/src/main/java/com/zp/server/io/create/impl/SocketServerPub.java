@@ -38,6 +38,9 @@ public class SocketServerPub implements ServerProtcolPub {
                     Socket socket = server.accept();
                     log.info("receive socket client connections !");
                     SocketSessionClient sessionClient = new SocketSessionClient(socket);
+                    if(sessionClient.getSessionId()==null){
+                        continue;
+                    }
                     RequestHandler handler = new SocketHandler(sessionClient);
                     setClientToPool(sessionClient.getSessionId(), handler);
                 }

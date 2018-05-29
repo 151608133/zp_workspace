@@ -42,6 +42,7 @@ public class SocketSessionClient extends SessionClient<Socket> {
             log.info("sim number:"+phoneNum);
         }catch (Exception e){
             log.error(e.getMessage(),e);
+            return null;
         }
         return phoneNum;
     }
