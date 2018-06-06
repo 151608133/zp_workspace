@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zp.set.dao.BakMapper">
+	<select id="getSysBakTask" resultType="SysBakTask" >
+		select * from sys_bak_task
+	</select>
+	<insert id="saveSysBakTask" parameterType="sysBakTask">
+		insert into sys_bak_task(user_id,task_status,task_data) values(#{user_id},#{task_status},now())
+	</insert>
+	<delete id="delSysBakTask">
+		delete from sys_bak_task
+	</delete>
+	<insert id="saveSysBak" parameterType="SysBak">
+		insert into sys_bak values(null,now(),#{bak_file_path},#{bak_file_name},#{bak_data_path},#{bak_data_name},#{bak_status})
+	</insert>
+	<select id="listPageSysBak"  parameterType="SysBak" resultType="SysBak">
+		select * from sys_bak where bak_status=1 order by bak_data desc
+	</select>
+	<select id="getSysBak"  parameterType="SysBak" resultType="SysBak">
+		select * from sys_bak where bak_status=1
+		<if test=" bak_id!=0 ">
+			and bak_id=#{bak_id}
+		</if>
+		order by bak_data desc
+	</select>
+	<select id="getSysBak2"  parameterType="String" resultType="SysBak">
+		select * from sys_bak where bak_status=1 and bak_file_name=#{bakFileName}
+	</select>
+	<select id="findlistPageSysBak"  parameterType="map" resultType="SysBak">
+		select * from sys_bak where bak_status=1 
+		<if test=" startdate != null ">
+			and bak_data &gt; #{startdate}
+		</if>
+		<if test=" enddate != null ">
+			and bak_data &lt; #{enddate} 
+		</if>
+		order by bak_data desc
+	</select>
+	<update id="updateSysBakStatus" parameterType="SysBak">
+		update sys_bak set bak_status=0 
+		<if test="bak_id!=0">
+			where bak_id=#{bak_id}
+		</if>
+	</update>
+	<insert id="saveSysBakRestore" parameterType="SysBakRestore">
+		insert into sys_bak_restore(file_bak_id,data_bak_id,restore_remark,restore_data,user_id,restore_status) 
+		values(#{file_bak_id},#{data_bak_id},#{restore_remark},now(),#{user_id},#{restore_status})
+	</insert>
+	<update id="updateSysBakRestore" parameterType="SysBakRestore">
+		update sys_bak_restore set restore_status = #{restore_status} where restore_id=#{restore_id}
+	</update>
+	<update id="updateSysBakRestore2" parameterType="SysBakRestore">
+		update sys_bak_restore set restore_status = 2
+	</update>
+	<select id="querySysBakRestore" resultType="SysBakRestore" parameterType="Long">
+		select * from sys_bak_restore where restore_id in (select max(restore_id) from sys_bak_restore where user_id =#{user_id} and restore_status=1)
+	</select>
+</mapper>

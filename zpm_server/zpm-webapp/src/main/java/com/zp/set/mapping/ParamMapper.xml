@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zp.set.dao.ParamMapper">
+
+  
+  <resultMap id="paramResult"  type="Param"> 
+		<id property="id"  column="id" />
+		<result property="is_alarm" column="is_alarm"/>
+		<result property="message" column="message"/>
+		<result property="email" column="email"/>
+		<result property="app_message" column="app_message"/>
+		<result property="is_bak" column="is_bak"/>
+		<result property="message_gateway" column="message_gateway"/>
+		<result property="message_password" column="message_password"/>
+		<result property="email_address" column="email_address"/>
+		<result property="email_account" column="email_account"/>
+		<result property="email_password" column="email_password"/>
+		<result property="bak_time" column="bak_time"/>
+  </resultMap>
+
+  <select id="getParam" parameterType="map" resultType="Param">
+    SELECT * FROM sys_param where id=#{id} 
+  </select>
+  
+  <update id="updateParam" parameterType="Param"> 
+	UPDATE sys_param
+	<set> 
+		is_alarm=#{is_alarm}, 
+		message=#{message},
+		email=#{email}, 
+		app_message=#{app_message},
+		is_bak=#{is_bak}, 
+		message_gateway=#{message_gateway},
+		message_password=#{message_password}, 
+		email_address=#{email_address},
+		email_account=#{email_account}, 
+		email_password=#{email_password},
+		bak_time=#{bak_time}
+	</set>
+	WHERE id=#{id} 
+  </update>
+  
+
+</mapper>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+		p:location="classpath:/jdbc.properties" />
+		
+	<!-- 数据源配置, 使用应用中的DBCP数据库连接池 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<!-- Connection Info -->
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.databaseurl}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<!-- Connection Pooling Info -->
+		<property name="maxActive" value="${dbcp.maxActive}" />
+		<property name="maxIdle" value="${dbcp.maxIdle}" />
+		<property name="defaultAutoCommit" value="false" />
+		<!-- 连接Idle一个小时后超时 -->
+		<property name="timeBetweenEvictionRunsMillis" value="3600000" />
+		<property name="minEvictableIdleTimeMillis" value="3600000" />
+	</bean>
+
+	<!-- define the SqlSessionFactory 
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="typeAliasesPackage" value="com.yinda" />
+    </bean>-->
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:mybatis-mapper-config.xml"/>
+	</bean>
+	
+    <!-- scan for mappers and let them be autowired -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.zp.*" />
+    </bean>
+    
+	<!-- enable transaction demarcation with annotations-->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+	 
+	<!-- transaction manager, use JtaTransactionManager for global tx 支持事务注解的（@Transactional）-->
+	<!-- 配置事务管理器，注意这里的dataSource和SqlSessionFactoryBean的dataSource要一致，不然事务就没有作用了 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+    <!-- 激活annotation功能 -->
+	<context:annotation-config />
+	<!-- 激活annotation功能 -->
+	<context:spring-configured/>
+	
+	<!-- 不扫描带有@Controller注解的类。因为这些类已经随容器启动时，在servlet-context中扫描过一遍了 -->
+	<context:component-scan base-package="com.zp.*">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+</beans>

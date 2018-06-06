@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zp.set.dao.UseInfoMapper">
+
+	<select id="getUseInfoList2" parameterType="map" resultType="HashMap">
+		select count(1) num,tt.func_id,tt.oper_time,tt.func_name from (
+		select h1.id id,t1.func_id func_id,DATE_FORMAT( h1.oper_time, '%Y-%m-%d' ) oper_time,t1.func_name func_name from 
+		t_operation_log h1 
+		LEFT JOIN t_function t1 on h1.func_id=t1.func_id
+		UNION
+		select h1.id id,t2.func_id func_id,DATE_FORMAT( h1.oper_time, '%Y-%m-%d' ) oper_time,t2.func_name func_name from 
+		t_operation_log h1 
+		LEFT JOIN t_function t1 on h1.func_id=t1.func_id
+		LEFT JOIN t_function t2 on t2.func_id=t1.parent_func_id
+		UNION
+		select h1.id id,t3.func_id func_id,DATE_FORMAT( h1.oper_time, '%Y-%m-%d' ) oper_time,t3.func_name func_name  from 
+		t_operation_log h1 
+		LEFT JOIN t_function t1 on h1.func_id=t1.func_id
+		LEFT JOIN t_function t2 on t2.func_id=t1.parent_func_id
+		LEFT JOIN t_function t3 on t3.func_id=t2.parent_func_id
+		) tt 
+		where func_id is not null 
+		<if test="startTime!=null and startTime!='' and endTime!=null and endTime!=''">
+  			AND oper_time BETWEEN #{startTime} AND #{endTime}
+  		</if>
+		GROUP by func_id,oper_time
+  	</select>
+  	<select id="getUseInfoList" parameterType="map" resultType="HashMap">
+		select count(1) num,tt.func_id,tt.oper_time,tt.func_name from (
+		select h1.id id,t1.func_id func_id,DATE_FORMAT( h1.oper_time, '%Y-%m-%d' ) oper_time,t1.func_name func_name from 
+		t_operation_log h1 
+		LEFT JOIN t_function t1 on h1.func_id=t1.func_id
+		
+		) tt 
+		where func_id >''
+		<if test="startTime>'' and endTime>''">
+  			AND oper_time BETWEEN #{startTime} AND date_add(#{endTime},interval 1 day) 
+  		</if>
+		GROUP by func_id,oper_time
+  	</select>
+ 
+	
+</mapper>

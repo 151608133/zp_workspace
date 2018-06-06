@@ -1,7 +1,6 @@
 package com.zp.server.io.alternation.inter;
 
 
-import com.zp.server.io.alternation.inter.ProctolResponse;
 
 public interface ResponseActionInter {
 

@@ -7,7 +7,9 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-  <context:property-placeholder location="classpath:param.properties"/><!-- 加载配置文件 -->
+  <context:property-placeholder location="classpath:config.properties,classpath:jdbc.properties,classpath*:param.properties"/><!-- 加载配置文件 -->
   <context:component-scan base-package="com.zp.*" />
   <context:annotation-config/>
+
+  <import resource="classpath*:spring.xml"/>
 </beans>

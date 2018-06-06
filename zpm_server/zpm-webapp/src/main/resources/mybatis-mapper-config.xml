@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD SQL Map Config 3.0//EN"  
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.zp.core.plugin.Page" alias="Page"/>
+		<typeAlias type="com.zp.sys.entity.Role" alias="Role"/>
+		<typeAlias type="com.zp.sys.entity.ParamFunction" alias="ParamFunction"/>
+		<typeAlias type="com.zp.sys.entity.Function" alias="Function"/>
+		<typeAlias type="com.zp.sys.entity.UserType" alias="UserType"/>
+		<typeAlias type="com.zp.sys.entity.User" alias="User"/>
+ 	    <typeAlias type="com.zp.sys.entity.ProvinceCity" alias="ProvinceCity"/><!-- 用户信息 -->
+		<!-- 日志相关实体类 -->
+		<typeAlias type="com.zp.set.entity.OperationLog2" alias="OperationLog2" />
+		<typeAlias type="com.zp.sys.entity.OperationLog" alias="OperationLog"/>
+		<typeAlias type="com.zp.sys.entity.OperationLogTemplate" alias="OperationLogTemplate"/>
+	</typeAliases>
+		
+	<plugins>
+		<plugin interceptor="com.zp.core.plugin.PagePlugin">
+			<!-- <property name="dialect" value="oracle"/> -->
+			<property name="dialect" value="mysql"/>
+			<property name="pageSqlId" value=".*listPage.*"/>
+		</plugin>
+	</plugins>
+	
+	<mappers>
+ 	    <mapper resource="com/zp/sys/mapping/UserMapper.xml"/>
+  		<mapper resource="com/zp/sys/mapping/RoleMapper.xml"/>
+		<mapper resource="com/zp/sys/mapping/FunctionMapper.xml"/>
+		<mapper resource="com/zp/sys/mapping/OperationLogMapper.xml"/>
+		<mapper resource="com/zp/sys/mapping/ProvinceCityMapper.xml"/>
+		<mapper resource="com/zp/set/mapping/UseInfoMapper.xml" />
+		<mapper resource="com/zp/set/mapping/AnalysisMapper.xml" />
+		<mapper resource="com/zp/set/mapping/BakMapper.xml" />
+		<mapper resource="com/zp/set/mapping/FeedbackMapper.xml" />
+		<mapper resource="com/zp/set/mapping/ParamMapper.xml" />
+
+	</mappers>
+</configuration>
