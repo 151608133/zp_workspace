@@ -2,14 +2,61 @@
 <!-- @version $Id: applicationContext.xml 561608 2007-08-01 00:33:12Z vgritsenko $ -->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-  <context:property-placeholder location="classpath:config.properties,classpath:jdbc.properties,classpath*:param.properties"/><!-- 加载配置文件 -->
+  <context:property-placeholder location="classpath:config.properties,classpath:jdbc.properties,classpath*:param.properties"  ignore-unresolvable="true"/><!-- 加载配置文件 -->
   <context:component-scan base-package="com.zp.*" />
   <context:annotation-config/>
 
-  <import resource="classpath*:spring.xml"/>
+  <mvc:annotation-driven>
+    <mvc:message-converters register-defaults="true">
+      <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+        <property name="supportedMediaTypes">
+          <list>
+            <value>text/html;charset=UTF-8</value>
+            <value>application/json</value>
+          </list>
+        </property>
+      </bean>
+    </mvc:message-converters>
+  </mvc:annotation-driven>
+  <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    <!-- 国际化信息所在的文件名 -->
+    <property name="basename" value="i18n" />
+    <!-- 如果在国际化资源文件中找不到对应代码的信息，就用这个代码作为名称  -->
+    <property name="useCodeAsDefaultMessage" value="true" />
+  </bean>
+
+  <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+
+  <!-- jsp页面解析器，当Controller返回XXX字符串时，先通过拦截器，然后该类就会在jsp/目录下，查找XXX.jsp文件-->
+  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="prefix">
+        <value>/jsp/</value>
+    </property>
+  <property name="suffix" >
+        <value>.jsp</value>
+  </property>
+
+  </bean>
+
+  <!-- 配置js，css等静态文件直接映射到对应的文件夹，不被DispatcherServlet处理 -->
+  <mvc:resources location="/resources/**" mapping="/resources"/>
+  <mvc:resources mapping="/images/**" location="/images/"/>
+  <mvc:resources mapping="/js/**" location="/js/"/>
+  <mvc:resources mapping="/css/**" location="/css/"/>
+
+  <!-- 配置页面访问地址www.xxx.com/about返回的静态html文件 -->
+  <!--<mvc:resources mapping="/about/**" location="/WEB-INF/html/"/>-->
+  <!-- 走servlet的默认配置，先走默认的web.xml配置的servlet，没有的话才找对应controller -->
+  <mvc:default-servlet-handler />
+
+  <!-- <import resource="classpath*:spring.xml"/>-->
+  <import resource="classpath:jdbc-context.xml"/>
 </beans>

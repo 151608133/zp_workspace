@@ -48,7 +48,7 @@ public class ParamController {
 		ModelAndView mv=new ModelAndView();
 		Param param = paramService.getParam();
 		mv.addObject("paramMap", param);
-		mv.setViewName("set/systemSet");
+		mv.setViewName("mapper/set/systemSet");
 		return mv;
 	}
 	/**
@@ -62,7 +62,7 @@ public class ParamController {
 		ModelAndView mv=new ModelAndView();
 		paramService.updateState(param);
 		mv.addObject("paramMap", param);
-		mv.setViewName("set/systemSet");
+		mv.setViewName("mapper/set/systemSet");
 		return mv;//"redirect:systemSet"
 	}
 	/**
@@ -110,7 +110,7 @@ public class ParamController {
 		}
 		mv.addObject("fileName", fileName);
 		mv.addObject("fileList", _fileList);
-		mv.setViewName("set/shareFile");
+		mv.setViewName("mapper/set/shareFile");
 		return mv;
 	}
 	
@@ -156,7 +156,7 @@ public class ParamController {
 	@RequestMapping("/softSversion")
 	public ModelAndView softSversion(){
 		ModelAndView mv=new ModelAndView();
-		mv.setViewName("set/softSversion");
+		mv.setViewName("mapper/set/softSversion");
 		return mv;
 	}
 	/**

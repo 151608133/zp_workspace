@@ -1,0 +1,80 @@
+@charset "utf-8";
+/* CSS Document */
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, hr, pre, form, fieldset, input, textarea, p, blockquoteth, td {
+	margin:0px;
+	padding:0px;
+	
+}
+img, input, select, button {
+	vertical-align:middle;
+}
+ul, ol, li {
+	list-style:none;
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+fieldset, img {
+	border:0;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-size:100%;
+	font-weight:normal;
+}
+a {
+	text-decoration:none;
+	color:#2e2f2f;
+}
+*:focus {
+	outline:none;
+}
+body {
+	font-family:arial, Microsoft Yahei;
+	font-size:12px;
+	font-family:"微软雅黑";
+	color:#36353d;
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+fieldset, img {
+	border:0;
+}
+.clear {
+	clear:both;
+}
+
+
+
+
+.wuliu{ margin:auto; width:98%; border:1px solid #e3e3e4; margin-top:10px;}
+.wuliu-top{ height:40px; background:#f7f7f7; font-size:18px; line-height:40px;}
+.wuliu-top span{ margin-left:20px;}
+.wuliu-xx-right{ width:100%; height:430px; overflow:auto;  margin:auto;}
+.wuliu-xx-right-nr{margin:0 20px; position:relative; border-left:1px solid #d9d9d9; }
+.wuliu-xx-right-nr-xx{ position:relative; left:-6px; top:-10px; line-height:18px; margin-top:10px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.wuliu-dian{float:left; margin:3px 10px 0 0}
+.wuliu-xx-right-nr-time{ float:left; font-weight:800; width:150px;}
+.week{ width:35px; float:left; font-weight:800;}
+.time{ width:75px; float:left;}
+.wuliu-xx-right-nr-xian{position: absolute; left:-1px; bottom:0; width:1px; height:18px; background:#fff;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

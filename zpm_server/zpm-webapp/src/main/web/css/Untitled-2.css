@@ -1,0 +1,49 @@
+@charset "utf-8";
+/* CSS Document */
+body,button,dd,dl,dt,fieldset,form,h1,h2,h3,h4,h5,h6,input,legend,li,ol,p,select,table,td,textarea,th,ul,div { 
+margin: 0; 
+padding: 0 ;
+} 
+body { 
+min-width: 320px;
+max-width: 700px;
+margin:auto;
+font-family: 'microsoft yahei',Verdana,Arial,Helvetica,sans-serif;
+color:#7c7c7c; 
+-webkit-text-size-adjust: none ;
+background:#fff;
+} 
+fieldset,img { 
+border: 0 
+} 
+ol,ul { 
+list-style: none 
+} 
+address,em { 
+font-style: normal 
+} 
+a { 
+color: #000; 
+text-decoration: none 
+} 
+table { 
+border-collapse: collapse 
+} 
+#clear { 
+clear: both; 
+width: 100%; 
+} 
+#clear: after { 
+display: block; 
+clear: both; 
+height: 1px; 
+content: '' 
+} 
+img, fieldset { 
+border: 0; 
+} 
+img { 
+height: auto; 
+width: auto\9; 
+width:100%; 
+} 

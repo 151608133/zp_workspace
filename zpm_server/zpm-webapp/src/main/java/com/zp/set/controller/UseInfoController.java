@@ -44,7 +44,7 @@ public class UseInfoController {
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 		
 		mv.addObject("useInfoList", list);
-		mv.setViewName("set/useInfo");
+		mv.setViewName("mapper/set/useInfo");
 		return mv;
 	}
 	/**
@@ -58,14 +58,14 @@ public class UseInfoController {
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 		
 		mv.addObject("useInfoList", list);
-		mv.setViewName("set/useInfo");
+		mv.setViewName("mapper/set/useInfo");
 		return mv;
 	}
 	//@RequestParam int fun_id,
 	@RequestMapping(value="/getDetail")
 	public ModelAndView getDetaillistPage(OperationLog2 operationLog,HttpServletRequest request,HttpSession session){
 		ModelAndView mv=new ModelAndView();
-		mv.setViewName("set/useInfoLog");
+		mv.setViewName("mapper/set/useInfoLog");
 		/*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar ca = Calendar.getInstance();
 		Date now = new Date();
@@ -97,7 +97,7 @@ public class UseInfoController {
 	public ModelAndView getOperationLog(HttpServletRequest request,OperationLog2 operationLog){
 		List<OperationLog2> list = operationLogService.getLoglistPage(operationLog);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("set/useInfoLog");
+		mv.setViewName("mapper/set/useInfoLog");
 		mv.addObject("logList", list);
 		mv.addObject("operationLog", operationLog);
 		return mv;

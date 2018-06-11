@@ -1,0 +1,67 @@
+@charset "utf-8";
+/* CSS Document */
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, hr, pre, form, fieldset, input, textarea, p, blockquoteth, td {
+	margin:0px;
+	padding:0px;
+}
+img, input, select, button{vertical-align:middle;}
+ul , ol {
+	list-style:none;
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+table tr td{
+	border-bottom:1px solid #e0e0e0;
+	}
+fieldset, img {
+	border:0;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-size:100%;
+	font-weight:normal;
+}
+a {
+	text-decoration:none;
+	color:#000;
+}
+body{
+	font-family:微软雅黑, Verdana, Geneva, sans-serif;
+	font-size:12px;
+	color:#5f5f5f;
+	}
+.clear{
+	clear:both;
+	}
+.fl{
+	float:left;
+	}
+.fr{
+	float:right;
+	}
+	
+	
+	
+	
+.spm-main{ width:1060px; margin:auto;}	
+.spm-top{ margin-top:10px;}
+.spm-bt{text-align:center;font-size:40px; padding:15px 0px;}
+.spm-js{font-size:18px; text-align:center; color:#5f5f5f; line-height:30px;}
+.spm-xianxi{ margin-top:50px;}
+.spm-xinxi-l{ width:30%; float:left; margin-top:80px;}
+.spm-xinxi-c{ width:35%; float:left; margin:0px 20px;}
+.spm-xinxi-r{ width:30%; float:left;margin-top:80px;}
+.spm-dian{ margin-bottom:30px;}
+.spm-ry{ border-top:1px solid #e0e0e0; padding-top:15px; color:#5f5f5f; font-size:16px; letter-spacing:0.5px;}
+.spm-xz{ border-top:1px solid #e0e0e0; padding-top:15px; color:#5f5f5f; height:110px;}
+.ejbt{ font-size:18px; font-weight:bold; color:#000; padding:15px 0px;}
+.ruanjs{ font-size:14px; color:#124191;}
+.banben{ font-size:12px; color:#5f5f5f;}
+.fs{ float:left; margin-bottom:10px; margin-right:14px;}
+.fs a:hover{ color:#3e6dbd;}
+
+	
+	
+	

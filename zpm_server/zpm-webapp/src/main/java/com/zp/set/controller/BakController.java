@@ -41,7 +41,7 @@ public class BakController {
 		ModelAndView mv=new ModelAndView();
 		List<SysBak> sysBakList = bakService.listPageSysBak(sysBak);
 		mv.addObject("sysBakList", sysBakList);
-		mv.setViewName("set/dataBak");
+		mv.setViewName("mapper/set/dataBak");
 		return mv;
 	}
 	
@@ -70,7 +70,7 @@ public class BakController {
 		Page page = (Page)map.get("page");
 		sysBak.setPage(page);
 		mv.addObject("sysBakList", sysBakList);
-		mv.setViewName("set/dataBak");
+		mv.setViewName("mapper/set/dataBak");
 		return mv;
 	}
 	
@@ -83,7 +83,7 @@ public class BakController {
 		bakService.updateSysBakStatus(sysBak);
 		List<SysBak> sysBakList = bakService.listPageSysBak(sysBak);
 		mv.addObject("sysBakList", sysBakList);
-		mv.setViewName("set/dataBak");
+		mv.setViewName("mapper/set/dataBak");
 		return mv;
 	}
 	
@@ -97,7 +97,7 @@ public class BakController {
 		ModelAndView mv=new ModelAndView();
 		List<SysBak> sysBakList = bakService.getSysBak(sysBak);
 		mv.addObject("sysBakList", sysBakList);
-		mv.setViewName("set/dataRestart");
+		mv.setViewName("mapper/set/dataRestart");
 		return mv;
 	}
 	/**
@@ -162,7 +162,7 @@ public class BakController {
 		sysBak.setBak_id(0);
 		List<SysBak> sysBakList = bakService.listPageSysBak(sysBak);
 		mv.addObject("sysBakList", sysBakList);
-		mv.setViewName("set/dataRestart");
+		mv.setViewName("mapper/set/dataRestart");
 		return mv;
 	}
 	/**

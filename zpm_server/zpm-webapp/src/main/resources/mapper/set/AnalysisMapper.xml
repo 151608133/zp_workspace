@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zp.set.dao.AnalysisMapper">
+
+	<select id="getMainLists" parameterType="map" resultType="com.zp.set.entity.MainType">
+		SELECT type drilldown,(SELECT name FROM t_classification a WHERE x.type = a.id) name,SUM(1) y FROM(
+			SELECT c.`name`,IFNULL(c.parent_id,c.id) type
+			FROM <if test="null!=type and ''!=type and 'read'==type">document_read</if><if test="null!=type and ''!=type and ('collect'==type or 'down'==type)">document_extend</if> a,document_info b,t_classification c 
+			WHERE a.document_id = b.id AND b.category_id = c.id
+			<if test="null!=type and ''!=type and 'collect'==type">AND handel_type = 2</if>
+			<if test="null!=type and ''!=type and 'down'==type">AND handel_type = 1</if>
+			<if test="null != startTime and '' != startTime">
+				AND TO_DAYS(a.time) > TO_DAYS(#{startTime})
+			</if>
+			<if test="null != endTime and '' != endTime">
+				AND TO_DAYS(a.time) &lt; TO_DAYS(#{endTime})
+			</if>
+			) x
+		GROUP BY type
+	</select>
+	
+	<select id="getaLists" parameterType="map" resultType="map">
+		SELECT type,SUM(1) sum,x.name FROM(
+			SELECT c.`name`,IFNULL(c.parent_id,c.id) type,c.id
+			FROM <if test="null!=type and ''!=type and 'read'==type">document_read</if><if test="null!=type and ''!=type and ('collect'==type or 'down'==type)">document_extend</if> a,document_info b,t_classification c 
+			WHERE a.document_id = b.id AND b.category_id = c.id 
+			<if test="null!=type and ''!=type and 'collect'==type">AND handel_type = 2</if>
+			<if test="null!=type and ''!=type and 'down'==type">AND handel_type = 1</if>
+			<if test="null != startTime and '' != startTime">
+				AND TO_DAYS(a.time) > TO_DAYS(#{startTime})
+			</if>
+			<if test="null != endTime and '' != endTime">
+				AND TO_DAYS(a.time) &lt; TO_DAYS(#{endTime})
+			</if>
+			) x
+		GROUP BY x.id
+	</select>
+	
+	<select id="listPageHotDocument" parameterType="com.zp.set.entity.HotDocument" resultType="com.zp.set.entity.HotDocument">
+		SELECT a.name typeName,IFNULL(a.parent_id,a.id) mainId,a.id classId,b.id document_id,b.file_name,
+			b.read_total,b.collect_total,b.down_total,(b.read_total+b.collect_total+b.down_total) total,
+			IFNULL(d.ckNumber,0) ckNumber,IFNULL(f.xzNumber,0) xzNumber,IFNULL(h.scNumber,0) scNumber,
+			(IFNULL(d.ckNumber,0)+IFNULL(f.xzNumber,0)+IFNULL(h.scNumber,0)) nowTotal,b.upload_user_name userName
+		FROM t_classification a , document_info b
+		LEFT JOIN (
+			SELECT c.document_id,COUNT(1) ckNumber,c.time FROM document_read c GROUP BY c.document_id) d 
+			ON b.id = d.document_id 
+		LEFT JOIN (
+			SELECT e.document_id,COUNT(1) xzNumber,e.time FROM document_extend e WHERE e.handel_type = 1 GROUP BY e.document_id) f 
+			ON b.id = f.document_id
+		LEFT JOIN (
+			SELECT g.document_id,COUNT(1) scNumber,g.time FROM document_extend g WHERE g.handel_type = 2 GROUP BY g.document_id) h 
+			ON b.id = h.document_id
+		WHERE a.id = b.category_id 
+		<if test="null != startTime and '' != startTime">
+			AND TO_DAYS(${type}.time) > TO_DAYS(#{startTime})
+		</if>
+		<if test="null != endTime and '' != endTime">
+			AND TO_DAYS(${type}.time) &lt; TO_DAYS(#{endTime})
+		</if>
+		<if test=" null!= mainId and '' != mainId and 0 != mainId">
+			AND ( a.parent_id = #{mainId} or a.id = #{mainId} )
+		</if>
+		<if test=" null!= classId and '' != classId and 0 != classId">
+			AND a.id = #{classId}
+		</if>
+		<if test="null != type and type == &quot;d&quot;">
+			ORDER BY ${type}.ckNumber desc
+		</if>
+		<if test="null != type and type == &quot;f&quot;">
+			ORDER BY ${type}.xzNumber desc
+		</if>
+		<if test="null != type and type == &quot;h&quot;">
+			ORDER BY ${type}.scNumber desc
+		</if>
+	</select>
+	
+	<select id="getClassMainAClass" parameterType="com.zp.set.entity.MainAClass" resultType="com.zp.set.entity.MainAClass">
+		SELECT id,name,parent_id FROM t_classification where parent_id = #{id}
+	</select>
+	
+	<select id="getFileType" parameterType="map" resultType="com.zp.set.entity.MainType">
+		SELECT SUM(1) y,file_type name,file_type drilldown
+		FROM document_info a,t_classification b
+		WHERE a.category_id = b.id AND a.audit_status = 2
+		<if test=" null!= mainId and '' != mainId and 0 != mainId">
+			AND ( b.parent_id = #{mainId} or b.id = #{mainId} )
+		</if>
+		<if test=" null!= classId and '' != classId and 0 != classId">
+			AND b.id = #{classId}
+		</if>
+		GROUP BY file_type
+	</select>
+	
+	<select id="listPageiframeAnalyze" parameterType="com.zp.set.entity.HotDocument" resultType="com.zp.set.entity.HotDocument">
+		SELECT a.file_name file_name,a.upload_user_name userName,c.`name` typeName,SUM(1) nowTotal 
+		FROM document_info a,<if test="null!=type and ''!=type and 'read'==type">document_read</if><if test="null!=type and ''!=type and ('collect'==type or 'down'==type)">document_extend</if> b,t_classification c 
+		WHERE a.id = b.document_id AND a.category_id = c.id 
+		AND a.audit_status = 2
+		<if test="null!=type and ''!=type and 'collect'==type">AND handel_type = 2</if>
+		<if test="null!=type and ''!=type and 'down'==type">AND handel_type = 1</if>
+		<if test="null != startTime and '' != startTime">
+			AND TO_DAYS(b.time) > TO_DAYS(#{startTime})
+		</if>
+		<if test="null != endTime and '' != endTime">
+			AND TO_DAYS(b.time) &lt; TO_DAYS(#{endTime})
+		</if>
+		<if test=" null!= pointName and '' != pointName">
+			AND ( c.name = #{pointName} or c.id in (select id from t_classification where parent_id = (select id from t_classification where name = #{pointName})) )
+		</if>
+		GROUP BY a.file_name
+		ORDER BY nowTotal DESC
+	</select>
+	
+	<select id="getMainLists4_1" parameterType="map" resultType="com.zp.set.entity.MainType">
+		SELECT c.user_name name,count(1) y,a.user_id drilldown
+		FROM document_info a,t_classification b,t_user c
+		WHERE a.category_id = b.id and a.user_id = c.user_id
+		AND a.audit_status = 2
+		<if test=" null!= mainId and '' != mainId and 0 != mainId">
+			AND ( b.parent_id = #{mainId} or b.id = #{mainId} )
+		</if>
+		<if test=" null!= classId and '' != classId and 0 != classId">
+			AND b.id = #{classId}
+		</if>
+		<if test="null != startTime and '' != startTime">
+			AND TO_DAYS(a.create_time) > TO_DAYS(#{startTime})
+		</if>
+		<if test="null != endTime and '' != endTime">
+			AND TO_DAYS(a.create_time) &lt; TO_DAYS(#{endTime})
+		</if>
+		<if test="null != userName and '' != userName">
+			AND c.user_name like '%${userName}%' 
+		</if>
+		GROUP BY a.user_id
+		order by y DESC
+		LIMIT 20
+	</select>
+	
+	<select id="getMainLists4" parameterType="map" resultType="com.zp.set.entity.MainType">
+		SELECT d.user_name name,COUNT(1) y,a.user_id drilldown
+		FROM <if test="null!=type and ''!=type and 'read'==type">document_read</if><if test="null!=type and ''!=type and ('collect'==type or 'down'==type)">document_extend</if> a,document_info b,t_classification c,t_user d 
+		WHERE a.document_id = b.id AND b.category_id = c.id AND a.user_id = d.user_id
+		<if test="null!=type and ''!=type and 'collect'==type">AND handel_type = 2</if>
+		<if test="null!=type and ''!=type and 'down'==type">AND handel_type = 1</if>
+		<if test=" null!= mainId and '' != mainId and 0 != mainId">
+			AND ( c.parent_id = #{mainId} or c.id = #{mainId} )
+		</if>
+		<if test=" null!= classId and '' != classId and 0 != classId">
+			AND c.id = #{classId}
+		</if>
+		<if test="null != startTime and '' != startTime">
+			AND TO_DAYS(a.time) > TO_DAYS(#{startTime})
+		</if>
+		<if test="null != endTime and '' != endTime">
+			AND TO_DAYS(a.time) &lt; TO_DAYS(#{endTime})
+		</if>
+		<if test="null != userName and '' != userName">
+			AND d.user_name like '%${userName}%' 
+		</if>
+		GROUP BY a.user_id 
+		order by y DESC
+		LIMIT 20
+	</select>
+	
+	<select id="listPageiframeAnalyze4" parameterType="com.zp.set.entity.HotDocument" resultType="com.zp.set.entity.HotDocument">
+		SELECT a.file_name file_name,a.upload_user_name userName,c.`name` typeName,b.time time
+		FROM document_info a,<if test="null!=type and ''!=type and 'read'==type">document_read</if><if test="null!=type and ''!=type and ('collect'==type or 'down'==type)">document_extend</if> b,t_classification c 
+		WHERE a.id = b.document_id AND a.category_id = c.id 
+		AND a.audit_status = 2
+		<if test="null!=type and ''!=type and 'collect'==type">AND handel_type = 2</if>
+		<if test="null!=type and ''!=type and 'down'==type">AND handel_type = 1</if>
+		<if test="null != startTime and '' != startTime">
+			AND TO_DAYS(b.time) > TO_DAYS(#{startTime})
+		</if>
+		<if test="null != endTime and '' != endTime">
+			AND TO_DAYS(b.time) &lt; TO_DAYS(#{endTime})
+		</if>
+		<if test=" null!= mainId and '' != mainId and 0 != mainId">
+			AND ( c.parent_id = #{mainId} or c.id = #{mainId} )
+		</if>
+		<if test=" null!= classId and '' != classId and 0 != classId">
+			AND c.id = #{classId}
+		</if>
+		<if test="null != userName and '' != userName">
+			AND EXISTS(select 1 from t_user t where t.user_id = b.user_id and t.user_name like '%${userName}%')
+		</if>
+		<if test="null != userId and '' != userId">
+			AND b.user_id = #{userId}
+		</if>
+		ORDER BY b.time DESC
+	</select>
+	
+	<select id="listPageiframeAnalyze4_1" parameterType="com.zp.set.entity.HotDocument" resultType="com.zp.set.entity.HotDocument">
+		SELECT a.file_name file_name,a.upload_user_name userName,c.`name` typeName,a.create_time as time
+		FROM document_info a,t_classification c 
+		WHERE a.category_id = c.id 
+		AND a.audit_status = 2
+		<if test="null != startTime and '' != startTime">
+			AND TO_DAYS(a.create_time) > TO_DAYS(#{startTime})
+		</if>
+		<if test="null != endTime and '' != endTime">
+			AND TO_DAYS(a.create_time) &lt; TO_DAYS(#{endTime})
+		</if>
+		<if test=" null!= mainId and '' != mainId and 0 != mainId">
+			AND ( c.parent_id = #{mainId} or c.id = #{mainId} )
+		</if>
+		<if test=" null!= classId and '' != classId and 0 != classId">
+			AND c.id = #{classId}
+		</if>
+		<if test="null != userName and '' != userName">
+			AND EXISTS(select 1 from t_user t where t.user_id = a.user_id and t.user_name like '%${userName}%')
+		</if>
+		<if test="null != userId and '' != userId">
+			AND a.user_id = #{userId}
+		</if>
+		ORDER BY a.create_time DESC
+	</select>
+</mapper>

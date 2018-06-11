@@ -1,0 +1,79 @@
+@charset "utf-8";
+/* CSS Document */
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, hr, pre, form, fieldset, input, textarea, p, blockquoteth, td {
+	margin:0px;
+	padding:0px;
+}
+img, input, select, button {
+	vertical-align:middle;
+}
+ul, ol, li {
+	list-style:none;
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+fieldset, img {
+	border:0;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-size:100%;
+	font-weight:normal;
+}
+a {
+	text-decoration:none;
+	color:#2e2f2f;
+}
+*:focus {
+	outline:none;
+}
+body {
+	font-family:arial, Microsoft Yahei;
+	font-size:14px;
+	color:#36353d;
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+fieldset, img {
+	border:0;
+}
+.clear {
+	clear:both;
+}
+
+
+
+
+.biaodan-bd{ width:90%; margin:auto; margin-top:20px;}
+.tab-bd{width:100%; border:1px solid #3d3d3d; color:#000000;table-layout: fixed; font-size:14px;}
+.tab-bd tr td{border-bottom:1px solid #3d3d3d;border-left:1px solid #3d3d3d; padding:8px 0; line-height:22px;overflow: hidden; white-space: nowrap; text-overflow: ellipsis; padding-left:8px;}
+.bt-jc{color:#000000; font-weight:bold; text-align:center;}
+.input-sr{border:1px solid #3d3d3d; line-height:30px; height:30px; width:70%;border-radius:3px; text-indent:8px;font-family: "Microsoft YaHei" ; font-size:12px;}
+.btn-cx{background:#1a57be; height:32px; color:#fff; border:none;font-family: "Microsoft YaHei" ; border-radius:3px; padding:0 20px;overflow: visible; line-height:32px; font-size:14px; cursor:pointer; margin-right:5px;}
+
+.sc-an{float:left; width:33%;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

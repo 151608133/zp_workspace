@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zp.sys.dao.OperationLogMapper">
+	<insert id="insertOperationLog" parameterType="com.zp.set.entity.OperationLog2">
+   		INSERT INTO t_operation_log (id,user_id, ip,oper_time,result_code,operType,description,click_Name)
+    	VALUES (OPERATION_LOG_ID_SEQ.nextval,#{userId},#{ip},sysdate,#{resultCode},#{operType},#{description},#{clickName})
+  	</insert>
+  	
+  	<select id="getLoglistPage" parameterType="com.zp.set.entity.OperationLog2" resultType="com.zp.set.entity.OperationLog2">
+  		SELECT log.id,ip,log.oper_time operTime,t.user_name userName,
+		log.description,log.operType 
+		FROM t_operation_log log ,t_user t 
+		WHERE log.user_id = t.user_id
+  		<if test="startTime>'' and endTime>''">
+  			AND (log.oper_time >= to_date(#{startTime},'yyyy-mm-dd hh24:mi:ss') and log.oper_time &lt;= to_date(#{endTime},'yyyy-mm-dd hh24:mi:ss'))
+  		</if>
+  		<if test="userName!=null and userName!=''">
+  			AND EXISTS (SELECT 1 FROM t_user c WHERE c.user_name = #{userName} AND c.user_id = log.user_id)
+  		</if>
+  		<if test="description!=null and description!=''">
+  			AND description like '%${description}%'
+  		</if>
+  		order by log.oper_time desc
+  	</select>
+  	
+  	<select id="getLog2" parameterType="com.zp.set.entity.OperationLog2" resultType="HashMap">
+  		SELECT log.operType FROM t_operation_log log GROUP BY operType
+  	</select>
+  	
+  	<update id="delOperationLog" parameterType="String">
+  		UPDATE t_operation_log SET status_cd='00X' WHERE id=#{logId}
+  	</update>
+  	
+  	<select id="getOperationContentTemplate" parameterType="Map" resultType="com.zp.sys.entity.OperationLogTemplate">
+   		select content,params from t_operation_log_template t where t.language = #{language} and t.code = #{code} limit 0,1
+  	</select>
+  	
+  	<select id="testOperAgain" parameterType="Map" resultType="com.zp.set.entity.OperationLog2">
+   		SELECT COUNT(1) FROM t_operation_log WHERE TO_DAYS(NOW()) - TO_DAYS(oper_time)  &lt;  1/1440
+   		WHERE user_id = #{userId} AND operType = #{operType} AND ip = #{ip}
+   		<if test="clickName != null and clickName != ''">
+   			AND clickName = #{clickName}
+   		</if>
+   		<if test="searchName != null and searchName != ''">
+   			AND searchName = #{searchName}
+   		</if>
+  	</select>
+
+</mapper>

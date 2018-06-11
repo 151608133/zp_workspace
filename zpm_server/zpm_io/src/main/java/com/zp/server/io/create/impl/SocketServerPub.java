@@ -6,6 +6,7 @@ import com.zp.server.io.create.inter.ServerProtcolPub;
 import com.zp.server.model.ServerParams;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
@@ -23,6 +24,7 @@ public class SocketServerPub implements ServerProtcolPub {
     private ServerParams params;
 
     @Autowired
+    @Qualifier(value = "ClientsManagerPools")
     private ClientManager manager;
 
     @Override

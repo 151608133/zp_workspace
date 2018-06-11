@@ -14,9 +14,9 @@ public class ServerInitListener implements ApplicationListener<ContextRefreshedE
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-//        if(event.getApplicationContext().getParent()!=null){
+        if(event.getApplicationContext().getParent()!=null){
             SocketServerPub bean = event.getApplicationContext().getBean(SocketServerPub.class);
             bean.start();
-//        }
+        }
     }
 }

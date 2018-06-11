@@ -25,16 +25,14 @@
 	</plugins>
 	
 	<mappers>
- 	    <mapper resource="com/zp/sys/mapping/UserMapper.xml"/>
-  		<mapper resource="com/zp/sys/mapping/RoleMapper.xml"/>
-		<mapper resource="com/zp/sys/mapping/FunctionMapper.xml"/>
-		<mapper resource="com/zp/sys/mapping/OperationLogMapper.xml"/>
-		<mapper resource="com/zp/sys/mapping/ProvinceCityMapper.xml"/>
-		<mapper resource="com/zp/set/mapping/UseInfoMapper.xml" />
-		<mapper resource="com/zp/set/mapping/AnalysisMapper.xml" />
-		<mapper resource="com/zp/set/mapping/BakMapper.xml" />
-		<mapper resource="com/zp/set/mapping/FeedbackMapper.xml" />
-		<mapper resource="com/zp/set/mapping/ParamMapper.xml" />
-
+  		<mapper resource="mapper/sys/RoleMapper.xml"/>
+		<mapper resource="mapper/sys/FunctionMapper.xml"/>
+		<mapper resource="mapper/sys/OperationLogMapper.xml"/>
+		<mapper resource="mapper/sys/ProvinceCityMapper.xml"/>
+		<mapper resource="mapper/sys/UserMapper.xml"/>
+		<mapper resource="mapper/set/UseInfoMapper.xml" />
+		<mapper resource="mapper/set/AnalysisMapper.xml"/>
+		<mapper resource="mapper/set/BakMapper.xml" />
+		<mapper resource="mapper/set/ParamMapper.xml" />
 	</mappers>
 </configuration>

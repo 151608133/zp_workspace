@@ -61,6 +61,7 @@ public class LoginController {
 	@RequestMapping(value="/login",method=RequestMethod.GET)
 	public String loginGet(){
 		//List list = provinceCityService.provinceCityList();
+		logger.info("123123");
 		return "login";
 	}
 	

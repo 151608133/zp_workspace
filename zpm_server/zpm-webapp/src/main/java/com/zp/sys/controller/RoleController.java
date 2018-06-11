@@ -59,19 +59,19 @@ public class RoleController {
 		return mv;
 	}
 	
-//	@RequestMapping(method=RequestMethod.GET)
-//	public ModelAndView getRoleList(Role role,HttpSession session,HttpServletRequest request){
-//		User user = (User)request.getSession().getAttribute(Const.SESSION_USER);
-//		List<Role> roleList = roleService.getRolelistPage(role);
-//		ModelAndView mv = new ModelAndView();
-//		mv.setViewName("system/roles");
-//		mv.addObject("roleList", roleList);
-//		mv.addObject("role", role);
-//		mv.addObject("user", user);
-//		operationLogService.insertOperationLog(request, "角色管理", "角色信息列表",
-//				"查询角色信息列表", "成功");
-//		return mv;
-//	}
+	@RequestMapping(method=RequestMethod.GET)
+	public ModelAndView getRoleList(Role role,HttpSession session,HttpServletRequest request){
+		User user = (User)request.getSession().getAttribute(Const.SESSION_USER);
+		List<Role> roleList = roleService.getRolelistPage(role);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("system/roles");
+		mv.addObject("roleList", roleList);
+		mv.addObject("role", role);
+		mv.addObject("user", user);
+		operationLogService.insertOperationLog(request, "角色管理", "角色信息列表",
+				"查询角色信息列表", "成功");
+		return mv;
+	}
 	/**
 	 * 进入添加页面
 	 * @return

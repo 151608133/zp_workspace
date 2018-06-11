@@ -11,7 +11,7 @@ import java.math.BigInteger;
 /**
  * 请求报文组装工厂
  */
-@Component
+@Component("proctolRequestFactory")
 public class ProctolRequestFactory implements RequestActionInter {
 
 

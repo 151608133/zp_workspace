@@ -37,7 +37,7 @@ public class OperationLogController {
 		List<OperationLog2> list = operationLogService.getLoglistPage(operationLog);
 		List<HashMap<String,Object>> list2 = operationLogService.getLoglistPage2(operationLog);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("set/actionlog");
+		mv.setViewName("mapper/set/actionlog");
 		mv.addObject("logList", list);
 		mv.addObject("logList2", list2);
 		mv.addObject("operationLog", operationLog);
@@ -54,7 +54,7 @@ public class OperationLogController {
 		List<OperationLog2> list = operationLogService.getLoglistPage(operationLog);
 		List<HashMap<String,Object>> list2 = operationLogService.getLoglistPage2(operationLog);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("set/actionlog");
+		mv.setViewName("mapper/set/actionlog");
 		mv.addObject("logList", list);
 		mv.addObject("logList2", list2);
 		mv.addObject("operationLog", operationLog);

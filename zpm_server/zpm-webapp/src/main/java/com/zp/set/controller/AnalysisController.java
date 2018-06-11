@@ -93,7 +93,7 @@ public class AnalysisController {
 		alist.add(lt3);
 		alist.add(lt4);
 		mv.addObject("alist",JSONArray.fromObject(alist));
-		mv.setViewName("set/analyze");
+		mv.setViewName("mapper/set/analyze");
 		mv.addObject("startTime",startTime);
 		mv.addObject("endTime",endTime);
 		mv.addObject("type",type);
@@ -112,7 +112,7 @@ public class AnalysisController {
 		List<HotDocument> hotDocumentList = analysisService.listPageHotDocument(hd);
 		mv.addObject("hotDocument", hotDocumentList);
 		mv.addObject("Hd", hd);
-		mv.setViewName("set/analyze2");
+		mv.setViewName("mapper/set/analyze2");
 		return mv;
 	}
 	
@@ -153,7 +153,7 @@ public class AnalysisController {
 		mv.addObject("classId", classId);
 		mv.addObject("iframeAnalyzeSrc", iframeAnalyzeSrc);
 		mv.addObject("audit_status",audit_status);
-		mv.setViewName("set/analyze3");
+		mv.setViewName("mapper/set/analyze3");
 		return mv;
 	}
 	
@@ -174,7 +174,7 @@ public class AnalysisController {
 		List<HotDocument> iframeAnalyze = analysisService.listPageiframeAnalyze(hd);
 		mv.addObject("hotDocument", iframeAnalyze);
 		mv.addObject("Hd", hd);
-		mv.setViewName("set/iframeAnalyze");
+		mv.setViewName("mapper/set/iframeAnalyze");
 		return mv;
 	}
 	
@@ -194,7 +194,7 @@ public class AnalysisController {
 		List<HotDocument> iframeAnalyze = analysisService.listPageiframeAnalyze(hd);
 		mv.addObject("hotDocument", iframeAnalyze);
 		mv.addObject("Hd", hd);
-		mv.setViewName("set/iframeAnalyze");
+		mv.setViewName("mapper/set/iframeAnalyze");
 		return mv;
 	}
 	
@@ -221,7 +221,7 @@ public class AnalysisController {
 		}else{
 			mainList = analysisService.getMainLists4(map);
 		}
-		mv.setViewName("set/analyze4");
+		mv.setViewName("mapper/set/analyze4");
 		mv.addObject("mainList",JSONArray.fromObject(mainList));
 		mv.addObject("startTime",startTime);
 		mv.addObject("endTime",endTime);
@@ -255,7 +255,7 @@ public class AnalysisController {
 		}
 		mv.addObject("hotDocument", iframeAnalyze);
 		mv.addObject("Hd", hd);
-		mv.setViewName("set/iframeAnalyze4");
+		mv.setViewName("mapper/set/iframeAnalyze4");
 		return mv;
 	}
 }

@@ -42,7 +42,7 @@
 	
     <!-- scan for mappers and let them be autowired -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.zp.*" />
+        <property name="basePackage" value="com.zp" />
     </bean>
     
 	<!-- enable transaction demarcation with annotations-->
@@ -62,5 +62,6 @@
 	<!-- 不扫描带有@Controller注解的类。因为这些类已经随容器启动时，在servlet-context中扫描过一遍了 -->
 	<context:component-scan base-package="com.zp.*">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Component"/>
 	</context:component-scan>
 </beans>

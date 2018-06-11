@@ -7,6 +7,7 @@ import com.zp.server.io.connmanage.inter.ClientManager;
 import com.zp.server.io.create.inter.RequestHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component("dataAcqTimer")
@@ -15,9 +16,11 @@ public class DataAcqusitionTimer {
 
 
     @Autowired
+    @Qualifier("ClientsManagerPools")
     private ClientManager manager;
 
     @Autowired
+    @Qualifier("proctolRequestFactory")
     private RequestActionInter requestActionFactory;
 
 
