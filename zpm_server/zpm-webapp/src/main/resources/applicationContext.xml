@@ -57,6 +57,6 @@
   <!-- 走servlet的默认配置，先走默认的web.xml配置的servlet，没有的话才找对应controller -->
   <mvc:default-servlet-handler />
 
-  <!-- <import resource="classpath*:spring.xml"/>-->
+  <import resource="classpath*:spring.xml"/>
   <import resource="classpath:jdbc-context.xml"/>
 </beans>
