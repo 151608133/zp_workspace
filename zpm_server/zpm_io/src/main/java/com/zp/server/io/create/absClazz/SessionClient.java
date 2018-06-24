@@ -30,7 +30,7 @@ public abstract  class SessionClient<T> implements Channel {
     }
 
 
-    protected  String getSessionId(){
+    public  String getSessionId(){
         return this.sessionId;
     }
 
