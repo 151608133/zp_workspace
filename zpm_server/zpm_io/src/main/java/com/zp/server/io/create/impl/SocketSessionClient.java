@@ -32,7 +32,7 @@ public class SocketSessionClient extends SessionClient<Socket> {
             in.read(b,0,2);
             int length = b[1];
 
-            log.info("length value {}" ,length);
+            log.info("length value {} ,request ip {}" ,length,getT().getInetAddress().getHostAddress());
 
             if (length <= 0) {
                 return null;
@@ -45,7 +45,7 @@ public class SocketSessionClient extends SessionClient<Socket> {
                 Integer index = new Integer(b[i]);
                 phoneNum+=index;
             }
-            log.info("sim number:"+phoneNum);
+            log.info("sim number {} , request ip {}" , phoneNum,getT().getInetAddress().getHostAddress());
         }catch (Exception e){
             log.error(e.getMessage(),e);
             return null;
