@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.Arrays;
 
 @Slf4j
 public class SocketSessionClient extends SessionClient<Socket> {
@@ -40,11 +41,13 @@ public class SocketSessionClient extends SessionClient<Socket> {
 
             b=new byte[length];
             in.read(b,0,len);
+            phoneNum = new String(Arrays.copyOfRange(b,3,14));
 
-            for (int i=2;i<(2+11);i++){
-                Integer index = new Integer(b[i]);
-                phoneNum+=index;
-            }
+//            for (int i=3;i<(3+11);i++){
+//                new String(b[i]);
+//                Integer index = new Integer(b[i]);
+//                phoneNum+=index;
+//            }
             log.info("sim number {} , request ip {}" , phoneNum,getT().getInetAddress().getHostAddress());
         }catch (Exception e){
             log.error(e.getMessage(),e);
