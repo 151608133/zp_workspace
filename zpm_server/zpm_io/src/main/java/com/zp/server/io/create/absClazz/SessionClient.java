@@ -11,7 +11,7 @@ public abstract  class SessionClient<T> implements Channel {
 
     private T t;
 
-    private String sessionId;
+    protected String sessionId;
 
     public T getT(){
         return t;
@@ -22,7 +22,7 @@ public abstract  class SessionClient<T> implements Channel {
     }
 
     public void setSessionId(){
-        this.sessionId = getSessionId();
+        this.sessionId = createSessionId();
     }
 
     public SessionClient(T t){
@@ -30,6 +30,11 @@ public abstract  class SessionClient<T> implements Channel {
     }
 
 
-    protected abstract String getSessionId();
+    protected  String getSessionId(){
+        return this.sessionId;
+    }
+
+
+    protected abstract String createSessionId();
 
 }

@@ -18,7 +18,7 @@ public class SocketSessionClient extends SessionClient<Socket> {
     }
 
     @Override
-    protected String getSessionId() {
+    protected String createSessionId() {
         InputStream in = getInputStream();
         int len =0;
         String phoneNum = "";
