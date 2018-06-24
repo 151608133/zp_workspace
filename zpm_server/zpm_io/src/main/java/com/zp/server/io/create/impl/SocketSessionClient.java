@@ -32,6 +32,12 @@ public class SocketSessionClient extends SessionClient<Socket> {
             in.read(b,0,2);
             int length = b[1];
 
+            log.info("length value {}" ,length);
+
+            if (length <= 0) {
+                return null;
+            }
+
             b=new byte[length];
             in.read(b,0,len);
 
