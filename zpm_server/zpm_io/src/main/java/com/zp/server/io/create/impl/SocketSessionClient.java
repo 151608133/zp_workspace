@@ -2,6 +2,7 @@ package com.zp.server.io.create.impl;
 
 import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import com.zp.server.io.create.absClazz.SessionClient;
+import com.zp.server.utils.ByteUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.InputStream;
@@ -41,13 +42,9 @@ public class SocketSessionClient extends SessionClient<Socket> {
 
             b=new byte[length];
             in.read(b,0,len);
-            phoneNum = new String(Arrays.copyOfRange(b,3,14));
 
-//            for (int i=3;i<(3+11);i++){
-//                new String(b[i]);
-//                Integer index = new Integer(b[i]);
-//                phoneNum+=index;
-//            }
+            phoneNum = ByteUtils.convertHexToString(ByteUtils.bytesToHexString(Arrays.copyOfRange(b,3,14)));
+
             log.info("sim number {} , request ip {}" , phoneNum,getT().getInetAddress().getHostAddress());
         }catch (Exception e){
             log.error(e.getMessage(),e);
