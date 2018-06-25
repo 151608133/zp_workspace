@@ -21,7 +21,16 @@ public class ClientsManagerPools implements ClientManager {
      */
     @Override
     public void submit(String key, RequestHandler client) {
-        clientMap.put(key,client);
+        synchronized (clientMap) {
+            try {
+                boolean b = client.getClient().isAlive();
+                if (b == false) {
+                    clientMap.put(key,client);
+                }
+            }catch (Exception e){
+                clientMap.put(key,client);
+            }
+        }
     }
 
 
