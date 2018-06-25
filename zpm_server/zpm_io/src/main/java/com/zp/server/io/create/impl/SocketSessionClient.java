@@ -41,7 +41,7 @@ public class SocketSessionClient extends SessionClient<Socket> {
             }
 
             b=new byte[length];
-            in.read(b,0,len);
+            in.read(b,0,length);
 
             phoneNum = ByteUtils.convertHexToString(ByteUtils.bytesToHexString(Arrays.copyOfRange(b,3,14)));
 

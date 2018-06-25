@@ -16,6 +16,7 @@ public abstract class RequestAbstractHandler implements RequestHandler {
 
     private SessionClient client;
 
+    @Override
     public SessionClient getClient(){
         return  client;
     }
